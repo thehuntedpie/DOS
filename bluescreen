@@ -1,0 +1,9 @@
+--[[
+    Bluescreen API
+]]--
+--Url of the forum post
+local forumUrl = "computercraft.info/forums2/programs/topic"
+--Url of the issue section on GitHub
+local githubUrl = "github.com/thehuntedpie/DOS/issues"
+
+--to be continued
