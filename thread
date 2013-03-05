@@ -1,0 +1,37 @@
+thread = {}
+thread.list = { coroutine.running() }
+thread.getID = function(name)
+  for i = 1, #thread.list do
+    if thread.list[i]["name"] == name then
+       return thread.list[i]["id"]
+    end
+  end
+  return nil, "doesn't exist"
+end
+thread.create() = function(name, func)
+  local id = coroutine.create(func)
+  local newthread = {
+  ["name"] = name,
+  ["id"] = id,
+  ["state"] = coroutine.status(id),
+  }
+  table.insert(thread.list, newthread)
+end
+thread.start = function(...)
+  local tArgs = {...}
+  local args = {}
+  if #tArgs < 1 then
+    error("no arguments passed")
+  end
+  local id = thread.getID(name)
+  if not id then
+     error("thread doesn't exist")
+  end
+  if #tArgs > 1 then
+    for i=2, #tArgs do
+      table.insert(args, tArgs[i])
+      return coroutine.resume(id, unpack(args))
+    end
+  end
+  return coroutine.resume(id)
+end
