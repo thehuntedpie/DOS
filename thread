@@ -14,6 +14,7 @@ thread.create() = function(name, func)
   ["name"] = name,
   ["id"] = id,
   ["state"] = coroutine.status(id),
+  ["running"] = false,
   }
   table.insert(thread.list, newthread)
 end
@@ -27,11 +28,36 @@ thread.start = function(...)
   if not id then
      error("thread doesn't exist")
   end
+  for i=1, #thread.list do
+    if thread.list[i]["id"] == id then
+      item = i
+    end
+  end
   if #tArgs > 1 then
     for i=2, #tArgs do
       table.insert(args, tArgs[i])
-      return coroutine.resume(id, unpack(args))
+      result = coroutine.resume(id, unpack(args))
+      if result then thread.list[item]["running"] = true else error("failed Starting coroutine")
+      return result
     end
   end
   return coroutine.resume(id)
+end
+thread.running = function()
+  local id = coroutine.running()
+  for i=1, #thread.list do
+    if thread.list[i]["id"] == id then
+      item = i
+    end
+  end
+  if not thread.list[item] then error("coroutine doesn't exist") end
+  return thread.list[item]["running"]
+end
+thread.kill = function(name)
+  for i=1, #thread.list do
+    if thread.list[i]["name"] == name and thread.list[i]["running"] == false then
+      thread.list[i]["running"] = false
+      return true
+    end
+  end
 end
