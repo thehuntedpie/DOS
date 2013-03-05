@@ -8,7 +8,7 @@ thread.getID = function(name)
   end
   return nil, "doesn't exist"
 end
-thread.create() = function(name, func)
+thread.create = function(name, func)
   local id = coroutine.create(func)
   local newthread = {
   ["name"] = name,
@@ -37,7 +37,7 @@ thread.start = function(...)
     for i=2, #tArgs do
       table.insert(args, tArgs[i])
       result = coroutine.resume(id, unpack(args))
-      if result then thread.list[item]["running"] = true else error("failed Starting coroutine")
+      if result then thread.list[item]["running"] = true else error("failed Starting coroutine") end
       return result
     end
   end
