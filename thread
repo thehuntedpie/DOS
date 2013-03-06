@@ -10,13 +10,16 @@ thread.getID = function(name)
 end
 thread.create = function(name, func)
   local id = coroutine.create(func)
-  local newthread = {
+  newthread = {
   ["name"] = name,
   ["id"] = id,
   ["state"] = coroutine.status(id),
   ["running"] = false,
   }
   table.insert(thread.list, newthread)
+  if not thread.list[#thread.list] then
+    error("could not insert into table")
+  end
 end
 thread.start = function(...)
   local tArgs = {...}
