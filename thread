@@ -2,8 +2,8 @@ thread = {}
 thread.list = {}
 thread.getID = function(name)
   for i = 1, #thread.list do
-    if thread.list[i]["name"] == name then
-       return thread.list[i]["id"]
+    for y=1, #thread.list[i] do
+      local id = thread.list[i][y]
     end
   end
   return nil, "doesn't exist"
