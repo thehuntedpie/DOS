@@ -1,4 +1,4 @@
-nativePull = os.pullEventRaw
+nativePull = coroutine.yield
 
 local inputs = {}
 
