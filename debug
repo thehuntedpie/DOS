@@ -1,0 +1,21 @@
+-- Just shell.run() this file and put breakpoint()'s  in
+-- You may specify a place to print
+local function getValue(name)
+  local f = loadstring("return "..name)
+  return f()
+end
+function breakpoint(x, y)
+  if not x then
+    print("Which variable do you want to check?")
+    local val = getValue(read())
+    print(tostring(val)
+    -- I will add table support
+  else
+    term.setCursorPos(x, y)
+    print("Which variable do you want to check?")
+    local val = getValue(read())
+    print(tostring(val)
+    x, y = term.getCursorPos()
+    term.setCursorPos(x, y)
+  end
+end
