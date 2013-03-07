@@ -66,13 +66,13 @@ end
 thread.refresh = function()
    for i=1, #thread.list do
       local id = thread.list[i]["id"]
-      thread.list[i]["state"] = coroutine.status(id)
+      thread.list[i].state = coroutine.status(id)
    end
 end
 thread.cleanUp = function()
   thread.refresh()
   for i=1, #threads.list do
-    if not threads.list[i]["running"] or not thread.list[i]["state"] then
+    if not threads.list[i].running or not thread.list[i].state then
        table.remove(threads.list, i)
     end
   end
