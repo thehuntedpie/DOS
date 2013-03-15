@@ -2,11 +2,10 @@
 -- You may specify a place to print and how many times to ask
 -- You can read tables by doing table[number] or table[#table] or just #table
 local function getValue(name)
-  local f = loadstring("return "..name)
-  local val = f()
+  val = _G[tostring(name)]
   return val
 end
-function breakpoint(count x, y)
+function breakpoint(count, x, y)
   for i=1, count do
     if not x then
       print("Which variable do you want to check?")
