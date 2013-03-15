@@ -3,7 +3,7 @@ thread.list = {}
 thread.getID = function(name)
   for i = 1, #thread.list do
     if thread.list[i].name == name then
-      return thread.listt[i].id
+      return thread.list[i].id
   end
   return nil, "doesn't exist"
 end
