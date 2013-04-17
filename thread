@@ -20,12 +20,9 @@ thread.create = function(name, func)
     error("could not insert into table")
   end
 end
-thread.start = function(...)
+thread.start = function(name, ...)
   local tArgs = {...}
   local args = {}
-  if #tArgs < 1 then
-    error("no arguments passed")
-  end
   local id = thread.getID(name)
   if not id then
      error("thread doesn't exist")
